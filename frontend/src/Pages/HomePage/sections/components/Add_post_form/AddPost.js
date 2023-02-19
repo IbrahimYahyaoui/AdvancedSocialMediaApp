@@ -162,10 +162,10 @@ const AddPost = () => {
                 className="icon emojiIcon"
                 icon={<UilGrin size={18} />}
                 aria-labelledby="emoji-label"
-                // onClick={() => {
-                //   setIsEmojiHide(!isEmojiHide);
-                //   setIsLocHide(true);
-                // }}
+                onClick={() => {
+                  setIsEmojiHide(!isEmojiHide);
+                  setIsLocHide(true);
+                }}
               ></Avatar>
               <div
                 className="emoji-selector"

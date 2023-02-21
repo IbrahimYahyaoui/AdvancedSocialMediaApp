@@ -3,6 +3,7 @@
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 12px;
   padding: 10px;
+  background: #fff;
   .preview-post-container {
     display: flex;
     flex-direction: column;
@@ -23,6 +24,7 @@
           .sub-details {
             color: #968e8e;
             display: flex;
+            align-items: center;
             .time {
               font-size: 12px;
               margin-right: 4px;
@@ -32,10 +34,43 @@
               display: flex;
               align-items: center;
               .icon {
-                // width: 10px;
                 margin-right: 0 2px;
               }
             }
+          }
+        }
+      }
+    }
+    .mid-section {
+      //   margin-bottom: px;
+
+      .post-test-content {
+        margin: 10px 0;
+      }
+      .gallery {
+        width: 100%;
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .action {
+      margin-top: 10px;
+      .interact {
+        height: 30px;
+        display: flex;
+
+        .like {
+          margin-right: 20px;
+        }
+        .sharedStyle {
+          display: flex;
+          align-items: center;
+          background-color: #968e8e;
+          height: 100%;
+          .icon {
+            cursor: pointer;
+            margin: 0 5px;
           }
         }
       }

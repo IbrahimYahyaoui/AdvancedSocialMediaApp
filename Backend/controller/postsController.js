@@ -11,14 +11,20 @@ const addPost = async (req, res) => {
   console.log(fileNameArray);
   try {
     const user = await USER.findOne({ username: postOwner });
-    // user.update
+
     const post = await posts.create({
       postOwner,
       postContent,
       location,
       postPictures: fileNameArray,
     });
-    res.status(200).send({ postContent, location, postPictures });
+
+    // update user posts list
+    await USER.updateOne(
+      { _id: user._id },
+      { $push: { postsListee: post._id } }
+    );
+    res.status(200).send({ post });
   } catch (error) {
     res.status(400).send(error.message);
   }

@@ -17,6 +17,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    postsListee: [],
   },
   { timestamps: true }
 );
@@ -24,6 +25,7 @@ userSchema.statics.signup = async function ({
   profilePicture,
   username,
   password,
+  postsListee,
 }) {
   const exists = await this.findOne({ username });
 
@@ -33,7 +35,12 @@ userSchema.statics.signup = async function ({
 
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
-  const user = await this.create({ username, password: hash, profilePicture });
+  const user = await this.create({
+    username,
+    password: hash,
+    profilePicture,
+    postsListee,
+  });
   console.log("d");
   return user;
 };

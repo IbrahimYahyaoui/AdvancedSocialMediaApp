@@ -1,6 +1,8 @@
 const posts = require("../models/PostModel");
+const USER = require("../models/USER");
+
 const addPost = async (req, res) => {
-  const { postContent, location, postPictures } = req.body;
+  const { postContent, location, postPictures, postOwner } = req.body;
   let files = req.files;
   let fileNameArray = [];
   for (let i = 0; i < files.length; i++) {
@@ -8,7 +10,10 @@ const addPost = async (req, res) => {
   }
   console.log(fileNameArray);
   try {
+    const user = await USER.findOne({ username: postOwner });
+    // user.update
     const post = await posts.create({
+      postOwner,
       postContent,
       location,
       postPictures: fileNameArray,

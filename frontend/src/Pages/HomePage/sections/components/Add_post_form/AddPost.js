@@ -14,33 +14,48 @@ import { toast } from "react-hot-toast";
 const AddPost = () => {
   const { user } = useContext(AuthContext);
   const [myProfilePictureImage, setMyProfilePictureImage] = useState("");
+  const textAreaRef = useRef(null);
+  const locRef = useRef(null);
+  const [postPictures, setPostPictures] = useState([]);
   const [isLocHide, setIsLocHide] = useState(false);
   const [isEmojiHide, setIsEmojiHide] = useState(false);
-  const textAreaRef = useRef(null);
-  const [postPictures, setPostPictures] = useState();
-  // const [postContent, setPostContent] = useState();
-  const [location, setLocation] = useState();
   const handelSubmit = () => {
-    const formData = new FormData();
-    formData.append("postContent", textAreaRef.current.value);
-    formData.append("location", location);
-    postPictures.forEach((picture) => {
-      formData.append("postPictures", picture);
-    });
-    console.log(Array.from(formData));
-    fetch("http://localhost:4000/dot/addPosts", {
-      method: "POST",
+    if (textAreaRef.current.value === "" && postPictures.length === 0) {
+      console.log("test");
+    } else {
+      const formData = new FormData();
+      formData.append("postContent", textAreaRef.current.value);
+      formData.append("location", locRef.current.value);
+      formData.append("postOwner", user.username);
+      if (postPictures.length > 0) {
+        postPictures.forEach((picture) => {
+          formData.append("postPictures", picture);
+        });
+      }
 
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        toast.success("Post added successfully");
+      console.log(Array.from(formData));
+      fetch("http://localhost:4000/dot/addPosts", {
+        method: "POST",
+
+        body: formData,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((Response) => {
+          Response.json();
+          if (Response.ok) {
+            textAreaRef.current.value = "";
+            locRef.current.value = "";
+            setPostPictures();
+            toast.success("Post added successfully");
+          }
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          toast.error("issues posting try later !");
+          console.log(err);
+        });
+    }
   };
   useEffect(() => {
     if (user) {
@@ -135,7 +150,7 @@ const AddPost = () => {
                 icon={<UilLocationPoint size={18} />}
                 onClick={() => {
                   setIsLocHide(!isLocHide);
-                  setIsEmojiHide(true);
+                  setIsEmojiHide(false);
                 }}
               ></Avatar>
               <div className="loc-Input">
@@ -144,39 +159,26 @@ const AddPost = () => {
                   placeholder="  Share location"
                   locinput={isLocHide ? "showlocation" : "hidelocation"}
                   className="locationInput"
-                  onChange={(e) => {
-                    setLocation(e.target.value);
-                  }}
+                  ref={locRef}
+                  // onChange={(e) => {
+                  //   setLocation(e.target.value);
+                  // }}
                 />
               </div>
             </div>
-            <div
-              className="emoji"
-              onClick={() => {
-                setIsEmojiHide(!isEmojiHide);
-                setIsLocHide(false);
-              }}
-            >
+            <div className="emoji">
               <Avatar
                 size="sm"
                 className="icon emojiIcon"
                 icon={<UilGrin size={18} />}
                 aria-labelledby="emoji-label"
-                // onClick={() => {
-                //   setIsEmojiHide(!isEmojiHide);
-                //   setIsLocHide(true);
-                // }}
+                onClick={() => {
+                  setIsEmojiHide(!isEmojiHide);
+                  // setIsLocHide(true);
+                }}
               ></Avatar>
-              <div
-                className="emoji-selector"
-                // emojiSelector="showEmojiSelector"
-              >
-                <div
-                  className="emojiPicker"
-                  // emojiSelector={
-                  //   isEmojiHide ? "showEmojiSelector" : "hideEmojiSelector"
-                  // }
-                >
+              <div className="emoji-selector">
+                <div className="emojiPicker">
                   <EmojiPicker
                     height={isEmojiHide ? 290 : 0}
                     width={isEmojiHide ? 270 : 0}

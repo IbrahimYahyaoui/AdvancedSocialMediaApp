@@ -57,6 +57,7 @@ const AddPost = () => {
         });
     }
   };
+  // getting user profile picture path
   useEffect(() => {
     if (user) {
       setMyProfilePictureImage(

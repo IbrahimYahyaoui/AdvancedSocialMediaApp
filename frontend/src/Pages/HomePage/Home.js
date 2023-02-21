@@ -16,7 +16,7 @@ const Home = () => {
       </section>
 
       <div className="Home-sections">
-        <section className="left-section"></section>
+        <section className="left-section">a</section>
         <section className="main-section">
           <MainSection />
         </section>

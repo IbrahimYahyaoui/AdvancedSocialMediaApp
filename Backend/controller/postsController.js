@@ -29,6 +29,16 @@ const addPost = async (req, res) => {
     res.status(400).send(error.message);
   }
 };
+// get all posts
+const getAllPosts = async (req, res) => {
+  try {
+    const allPosts = await posts.find();
+    res.status(200).send({ allPosts });
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
 module.exports = {
   addPost,
+  getAllPosts,
 };

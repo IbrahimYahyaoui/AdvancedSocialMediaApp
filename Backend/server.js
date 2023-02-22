@@ -18,6 +18,7 @@ app.use("/dot", addPostRoute);
 // inside public directory.
 app.use(express.static("public"));
 app.use("/profileImages", express.static("./uploads/profilePictures"));
+app.use("/postPicture", express.static("./uploads/PostsPicture"));
 // fix db
 mongoose.set("strictQuery", false);
 

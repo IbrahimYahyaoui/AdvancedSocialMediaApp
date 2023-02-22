@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./style.scss";
-import { Avatar, Dropdown } from "@nextui-org/react";
+import { Avatar, Divider, Dropdown, Spacer } from "@nextui-org/react";
 import { AuthContext } from "../../../../../Context/AuthContext";
 import {
   UilEllipsisV,
@@ -8,6 +8,7 @@ import {
   UilThumbsUp,
   UilThumbsDown,
 } from "@iconscout/react-unicons";
+import GridSystem from "./components/GridSystem";
 
 // import Lightbox from "react-image-lightbox";
 // import "react-image-lightbox/style.css";
@@ -23,14 +24,7 @@ const PostPerview = () => {
     }
   }, [user]);
   //
-  const images = [
-    {
-      url: "https://images.unsplash.com/photo-1556783900-2ebe375c20fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1556783900-2ebe375c20fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    },
-  ];
+
   return (
     <div className="perview-post-wrapper">
       <div className="preview-post-container">
@@ -42,7 +36,7 @@ const PostPerview = () => {
             <div className="user-details">
               <p className="username">{user.username}</p>
               <div className="sub-details">
-                <p className="time">20 day ,</p>
+                <p className="time">5h ago</p>
                 <p className="location">
                   <div className="icon">
                     <UilLocationPoint size={20} />
@@ -74,25 +68,22 @@ const PostPerview = () => {
             ipsum
           </p>
           <div>
-            <img
-              src="https://images.unsplash.com/photo-1556783900-2ebe375c20fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-              width="100%"
-            />
+            <GridSystem />
           </div>
         </div>
         <section className="action">
           <div className="interact">
             <div className="like sharedStyle">
-              <div className="icon">
-                <UilThumbsUp />
-              </div>
-              <p className="count">20</p>
+              <div className="icon">❤️️</div>
+              <p className="Count">10</p>
             </div>
-            <div className="dislike sharedStyle">
-              <div className="icon">
-                <UilThumbsDown />
-              </div>
-              <p className="count">20</p>
+            <div className="like sharedStyle">
+              <div className="icon">😆</div>
+              <p className="Count">10</p>
+            </div>
+            <div className="like sharedStyle">
+              <div className="icon">😡️</div>
+              <p className="Count">10</p>
             </div>
           </div>
         </section>

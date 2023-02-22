@@ -66,14 +66,21 @@
         .sharedStyle {
           display: flex;
           align-items: center;
-          background-color: #968e8e;
+          padding: 0 5px;
+          box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+            rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
           height: 100%;
+          border-radius: 12px;
+          cursor: pointer;
           .icon {
             cursor: pointer;
-            margin: 0 5px;
+            margin-right: 5px;
           }
         }
       }
+    }
+    .divider {
+      margin: 10px 0;
     }
   }
 }
